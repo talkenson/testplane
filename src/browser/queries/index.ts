@@ -60,16 +60,18 @@ async function injectDOMTestingLibrary(container: ElementBase) {
     });
 
     if (shouldInjectDTL) {
-        await containerWithExecute.execute(function (library) {
-            // add DOM Testing Library to page as a script tag to support Firefox
-            if (navigator.userAgent.indexOf("Firefox") !== -1) {
-                const script = window.document.createElement("script");
-                script.textContent = library;
-                window.document.head.append(script);
-            } else {
-                eval(library);
-            }
-        }, DOM_TESTING_LIBRARY_UMD);
+        // await containerWithExecute.execute(function (library) {
+        //     // add DOM Testing Library to page as a script tag to support Firefox
+        //     if (navigator.userAgent.indexOf("Firefox") !== -1) {
+        //         // const script = window.document.createElement("script");
+        //         // script.textContent = library;
+        //         // window.document.head.append(script);
+        //         window.eval(library);
+        //     } else {
+        //         eval(library);
+        //     }
+        // }, DOM_TESTING_LIBRARY_UMD);
+        await containerWithExecute.execute(DOM_TESTING_LIBRARY_UMD);
     }
 
     await containerWithExecute.execute(function (config: Config) {
@@ -218,6 +220,13 @@ function setupBrowser<Browser extends WebdriverIO.Browser & BrowserBase>(browser
         const queryName = key as QueryName;
 
         const query = async (...args: Parameters<WebdriverIOQueries[QueryName]>) => {
+            // const puppeteer = await browser.getPuppeteer();
+            // console.log("puppeteer", puppeteer);
+            // await puppeteer.pages();
+            // const pages = await puppeteer.pages();
+            // throw new Error("pages dump: " + JSON.stringify(pages, null, 2));
+            // // await Promise.all(pages.map(page => page.setBypassCSP(true)));
+
             const body = await browser.$("body");
             return within(body as ElementBase)[queryName](...(args as any[]));
         };

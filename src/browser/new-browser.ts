@@ -1,6 +1,6 @@
 import { URLSearchParams } from "url";
 import URI from "urijs";
-import { isBoolean, assign, isEmpty, set } from "lodash";
+import { assign, isBoolean, isEmpty, set } from "lodash";
 import { remote } from "@testplane/webdriverio";
 import type { Capabilities } from "@testplane/wdio-types";
 
@@ -12,10 +12,10 @@ import { getNormalizedBrowserName } from "../utils/browser";
 import { getInstance } from "../config/runtime-config";
 import {
     DEVTOOLS_PROTOCOL,
-    WEBDRIVER_PROTOCOL,
     LOCAL_GRID_URL,
-    W3C_CAPABILITIES,
     VENDOR_CAPABILITIES,
+    W3C_CAPABILITIES,
+    WEBDRIVER_PROTOCOL,
 } from "../constants/config";
 import { Config } from "../config";
 import { BrowserConfig } from "../config/browser-config";

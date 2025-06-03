@@ -1,0 +1,20 @@
+{
+  "name": "custom-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@testing-library/webdriverio": "^3.2.1",
+    "html-reporter": "10.18.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "testplane": "file:../.."
+  }
+}

@@ -13,6 +13,7 @@ import { AsyncEmitter } from "../events";
 import { BrowserConfig } from "../config/browser-config";
 import type { Callstack } from "./history/callstack";
 import type { WdProcess, WebdriverPool } from "../browser-pool/webdriver-pool";
+import { setupBrowser } from "./queries";
 
 const CUSTOM_SESSION_OPTS = [
     "outputDir",
@@ -104,6 +105,34 @@ export class Browser {
 
     protected _addSteps(): void {
         addRunStepCommand(this);
+    }
+
+    protected async _disableCSP(): Promise<void> {
+        // console.log(JSON.stringify(this._config, null, 2));
+        // possibilities are ff>125 bidi, ff<125 cdp, chrome cdp
+        // this._config.desiredCapabilities -> [browserName, browserVersion]
+        try {
+            // const session = this._session!;
+            // const pptr = await session.getPuppeteer();
+            // const pages = await pptr.pages();
+            // console.log("pages", JSON.stringify(pages, null, 2));
+            // await Promise.all(pages.map(page => page.setBypassCSP(true)));
+            // console.log("cdps, ", JSON.stringify(session.));
+            // session.
+            // await (await pptr.pages())[0].setBypassCSP(true);
+            // const result = await session.send({
+            //     // @ts-expect-error not documented
+            //     method: "Page.setBypassCSP",
+            //     params: { enabled: true },
+            // });
+            // console.log(result);
+        } catch (e) {
+            console.error("CSP bypass failed", e);
+        }
+    }
+
+    protected _addQueries(): void {
+        setupBrowser(this._session!);
     }
 
     protected _extendStacktrace(): void {

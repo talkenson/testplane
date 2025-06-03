@@ -8,5 +8,4 @@ export const customCommandFileNames = [
     "openAndWait",
     "switchToRepl",
     "moveCursorTo",
-    "_addDTLCommands",
 ];

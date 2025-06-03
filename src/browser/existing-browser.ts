@@ -77,6 +77,7 @@ export class ExistingBrowser extends Browser {
 
     async init({ sessionId, sessionCaps, sessionOpts }: SessionOptions, calibrator: Calibrator): Promise<this> {
         this._session = await this._attachSession({ sessionId, sessionCaps, sessionOpts });
+        await this._disableCSP();
 
         if (!isRunInNodeJsEnv(this._config)) {
             this._startCollectingCustomCommands();
@@ -85,6 +86,7 @@ export class ExistingBrowser extends Browser {
         this._extendStacktrace();
         this._addSteps();
         this._addHistory();
+        this._addQueries();
 
         await history.runGroup(
             {
